@@ -113,12 +113,12 @@ const refreshController = async (req, res) => {
         );
       }
 
-      const token = setOpenIDAuthTokens(tokenset, req, res, user._id.toString(), refreshToken);
+      const token = setOpenIDAuthTokens(tokenset, res, user._id.toString(), refreshToken);
 
       user.federatedTokens = {
         access_token: tokenset.access_token,
         id_token: tokenset.id_token,
-        refresh_token: refreshToken,
+        refresh_token: tokenset.refresh_token || refreshToken,
         expires_at: claims.exp,
       };
 
